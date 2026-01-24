@@ -1,5 +1,5 @@
 // import React, { useState } from 'react'
-import { LogOut, X ,ChartAreaIcon} from 'lucide-react'
+import { LogOut, X ,Plus , ChartAreaIcon} from 'lucide-react'
 import profile from "/image.png"
 import React, { useEffect, useState } from "react";
 import { useAuth } from '../context/AuthoProvider'
@@ -61,74 +61,79 @@ return (
  
 
   
-    < div className='h-full flex flex-col bg-[#232327]'>
+   <div className='h-screen flex flex-col bg-[#171717] border-r border-white/5 w-72 transition-all duration-300 ease-in-out shadow-2xl'>
 
+  {/* Header Section */}
+  <div className='p-5 flex items-center justify-between'>
+    <div className='flex items-center gap-2'>
+      <div className='w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white'>M</div>
+      <span className='text-lg font-semibold text-white tracking-tight'>Megatrone</span>
+    </div>
+    <button 
+      onClick={onClose} 
+      className="p-2 hover:bg-white/10 rounded-full transition-colors group"
+    >
+      <X className='text-gray-400 group-hover:text-white w-5 h-5'/>
+    </button>
+  </div>
 
-      {/* Header */}
-      <div className='p-4 border-gray-700 flex items-center justify-between'>
-      <div className='text-xl font-bold text-white'></div>
-      <button onClick={onClose}><X className='text-gray-300 w-6 h-6'/></button>
-      </div>
+  {/* Action Section */}
+  <div className="px-4 mb-2">
+    <button 
+      onClick={onNewChat} 
+      className='w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-3 rounded-xl transition-all shadow-lg shadow-indigo-600/20 active:scale-95'
+    >
+      <Plus size={18} /> New Chat
+    </button>
+  </div>
+
+  {/* History List - Flex-1 ensures this takes up all remaining space */}
+  <div className='flex-1 overflow-y-auto px-3 py-2 space-y-1 custom-scrollbar'>
+    <p className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-widest">Recent Chats</p>
     
+    <ul className="space-y-1">
+      {history.map((item) => (
+        <li 
+          key={item._id} 
+          className='group flex flex-col p-3 hover:bg-white/5 rounded-xl cursor-pointer transition-all border border-transparent hover:border-white/10'
+        >
+          <span className='text-sm text-gray-200 font-medium truncate w-full'>
+             {item.content || "Untitled Chat"}
+          </span>
+          <span className='text-xs text-gray-500 truncate'>
+            {item.response?.substring(0, 40)}...
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
 
-
-     <div>
-      <button
-  onClick={() => setShowSidebar(false)}
-  className="absolute top-4 left-4 flex items-center gap-2 bg-[#4f46e5] hover:bg-[#4338ca] text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M4 6h16M4 12h16M4 18h16"
-    />
-  </svg>
-  Chat
-</button></div>
-
-      
-
-
-
-      {/* History */}
-      <div className='flex-1 overflow-y-auto px-4 py-3 space-y-2'>
-      <button    onClick={ onNewChat} className='w-full bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl mb-4'>+New Chat</button>
-      <div className='flex-1 overflow-y-auto px-4 py-3 space-y-2'> <ul>
-  {history.map((item) => (
-    <li key={item._id} className='mb-4 p-2 bg-[#2e2e2e] rounded'>
-      <p><b>Prompt:</b> {item.content}</p>
-      <p><b>Response:</b> {item.response}</p>
-    </li>
-  ))}
-</ul>
-</div>
-      </div>
-      
-      
-     
-      
-
-     <div>
-     <div className='p-4 border-t  border-gray-700'>
-        <div className='flex flex-col gap-3'>
-            <div className='flex items-center gap-2 cursor-pointer'>
-                <img className='rounded-full w-8 h-8'src={profile} alt=''/>
-                <span className='text-gray-300'>{user?user.firstName:"My profile"}</span> 
-            </div> 
-            <button onClick={handlelogout} className='flex items-center gap-2 text-sm text-white px-4 py-2 rounded-lg  hover:bg-gray-700 transition duration-300'><LogOut className=''/>Logout</button>
+  {/* Profile & Footer */}
+  <div className='p-4 mt-auto border-t border-white/5 bg-[#1a1a1a]'>
+    <div className='flex flex-col gap-2'>
+      <div className='flex items-center gap-3 p-2 hover:bg-white/5 rounded-xl cursor-pointer transition-colors group'>
+        <div className="relative">
+          <img className='rounded-full w-9 h-9 border border-white/10' src={profile} alt='User'/>
+          <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#1a1a1a] rounded-full"></div>
         </div>
-     </div>
-      
+        <div className="flex flex-col">
+          <span className='text-sm font-medium text-white group-hover:text-indigo-400 transition-colors'>
+            {user ? user.firstName : "Guest User"}
+          </span>
+          <span className="text-[10px] text-gray-500 uppercase">Pro Plan</span>
+        </div>
+      </div> 
+
+      <button 
+        onClick={handlelogout} 
+        className='flex items-center gap-3 text-sm text-gray-400 font-medium px-3 py-2.5 rounded-xl hover:bg-red-500/10 hover:text-red-400 transition-all duration-200'
+      >
+        <LogOut size={18} /> Logout
+      </button>
     </div>
-    </div>
+  </div>
+  
+</div>
   )
 }
 

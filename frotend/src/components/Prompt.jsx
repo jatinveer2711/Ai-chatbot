@@ -111,98 +111,118 @@ await axios.post("http://localhost:4002/api/v1/history/save", {
       handlesend();
   }
   return (
-    <div className='flex flex-col items-center justify-between flex-1 w-full px-4 pb-4'>
-    <div>
-      {/* greeting section  */}
-      <div className='mt-16 text-center'>
-        {/* <img src='' alt='' /> */}
-        <h1 className='text-3xl font-semibold text-white mb-2'>Hi, I'am Megatrone</h1>
+  <div className='flex flex-col items-center justify-between h-screen w-full bg-[#171717] px-2 sm:px-4 pb-6'>
+  
+  {/* Header Section - Shrinks when messages appear */}
+  {prompt.length === 0 && (
+    <div className='flex flex-col items-center justify-center flex-1 transition-all duration-500'>
+      <div className='text-center'>
+        <div className="w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl mb-6 mx-auto shadow-lg shadow-blue-500/20" />
+        <h1 className='text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight'>
+          Hi, I'm <span className="text-blue-500">Megatrone</span>
+        </h1>
+        <p className='text-gray-400 text-lg'>How can I help you today?</p>
       </div>
-      <p className='text-gray-400 texxt-base mt-2'>How  can I help you today?</p>
     </div>
+  )}
 
-
-    {/* prompt */}
-
-
-    <div className='w-full max-w-4xl flex-1 overflow-y-auto mt-6 mb-4 space-y-4 max-h-[60vh] px-1'>
-    {prompt.map((msg,index)=>(
-      <div key ={index} className={`w-full flex ${msg.role==="user"?"justify-end":"justify-start"}`}>{msg.role==="assistant"?
-        (<div className='w-full bg-[#232323] text-white rounded-xl px-4 py-3 text-sm whitespace-pre-wrap'>
-          <ReactMarkdown
-          remarkPlugins={[remarkGFm]}
-          components={{
-            code({node,inline,className,children,...props}) {
-              const match =/language-(\w+)/.exec(className || "");
-              return !inline && match ? (
-                <SyntaxHighlighter
-                style={codeTheme}
-                language={match[1]}
-                PreTag="div"
-                className="rounded-lg mt-2"
-                {...props}
-                >
-                {String(children).replace(/\n$/,"")}
-                </SyntaxHighlighter>
-              ) : (
-                <code
-                className='bg-gray-800 px-1 py-0.5 rounded'
-                {...props}
-                >
-                  {children}
-                  </code>
-              )
-
-              
-            }
-          }}
-          >{msg.content}
-          </ReactMarkdown>
-        </div>):(
-       
-        <div className='w-[50%] bg-blue-700 text-white rounded-xl px-4 py-2 text-sm whitespace-pre-wrap'>{msg.content}</div>
-
-      )}</div>
+  {/* Chat History Area */}
+  <div className={`w-full max-w-4xl flex-1 overflow-y-auto mt-4 mb-4 space-y-6 px-2 custom-scrollbar ${prompt.length > 0 ? 'block' : 'hidden md:block opacity-0'}`}>
+    {prompt.map((msg, index) => (
+      <div key={index} className={`w-full flex ${msg.role === "user" ? "justify-end" : "justify-start animate-in fade-in slide-in-from-bottom-2"}`}>
+        {msg.role === "assistant" ? (
+          <div className='max-w-[90%] md:max-w-[85%] bg-[#232323] border border-white/5 text-gray-100 rounded-2xl px-5 py-4 text-sm md:text-base shadow-sm'>
+            <ReactMarkdown
+              remarkPlugins={[remarkGFm]}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  return !inline && match ? (
+                    <div className="relative group">
+                      <SyntaxHighlighter
+                        style={codeTheme}
+                        language={match[1]}
+                        PreTag="div"
+                        className="rounded-lg !mt-4 !mb-4 border border-white/10"
+                        {...props}
+                      >
+                        {String(children).replace(/\n$/, "")}
+                      </SyntaxHighlighter>
+                    </div>
+                  ) : (
+                    <code className='bg-[#383838] px-1.5 py-0.5 rounded text-blue-300' {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+              }}
+            >
+              {msg.content}
+            </ReactMarkdown>
+          </div>
+        ) : (
+          <div className='max-w-[85%] md:max-w-[70%] bg-blue-600 text-white rounded-2xl rounded-tr-none px-5 py-3 text-sm md:text-base shadow-lg shadow-blue-900/10'>
+            {msg.content}
+          </div>
+        )}
+      </div>
     ))}
+
+    {/* Loading States */}
     {loading && Typemessage && (
-      <div className=' justify-end self-end ml-auto break-words w-[30%] bg-blue-700 text-white rounded-xl px-4 py-2 text-sm whitespace-pre-wrap'>{Typemessage}</div>
+      <div className='flex justify-end'>
+        <div className='max-w-[70%] bg-blue-600/50 text-white/80 rounded-2xl px-5 py-3 text-sm animate-pulse'>
+          {Typemessage}
+        </div>
+      </div>
     )}
+    
     {loading && (
-      <div className='flex justify-start w-full'>
-      <div className='bg-[#323232] text-white px-4 py-2 rounded-xl text-sm whitespace-pre-wrap'>loading...</div>
+      <div className='flex justify-start animate-pulse'>
+        <div className='bg-[#232323] text-gray-400 px-5 py-3 rounded-2xl text-sm border border-white/5'>
+          Thinking...
+        </div>
       </div>
     )}
-    <div ref={promptEndREf}/>
-      </div>
-    
-      {/* <div></div> */}
-    
+    <div ref={promptEndREf} />
+  </div>
 
-    {/* input box */}
-
-    
-    <div className=' w-full  max-w-4xl relative mt-auto '>
-      <div className=' flex items-center bg-[#2f2f2f] rounded-[2rem] px-6 py-2 shadow-md'>
-        <input type='text' 
-        value={inputValue}   //jb koi user text dalega to neeche di gyi line setInputvalue(e.target.value)} iinputvalue ko update krri h matlab isme present text daal rhi h or firr value usko inputvalue ko dikha rha h 
-        //onkeydown me store handlekeydown ek function h jo ki handlesend ko call krra h "enter hi krne   se"
-        onChange={(e)=>setInputvalue(e.target.value)} onKeyDown={handlekeydown}  placeholder='Message Deepseek' className=' flex items-center bg-transparent w-full text-white placeholder-gray-400 text-lg outline-none'/>
-        <div className='flex items-center justify-between mt-4 gap-4'>
-          <div className='flex gap-2'>
-            {/* <button className='flex items-center gap-2 border-gray-500 text-white text-base px-3 py-1.5 rounded-full hover:bg-gray-600 transition'><Bot className='w-4 h-5'/>DeepThink (R1)</button> */}
-            {/* <button className='flex items-center gap-2 border-gray-500 text-white text-base px-3 py-1.5 rounded-full hover:bg-gray-600 transition'><Globe className='w-4 h-5'/>Search</button> */}
-            </div>
-            <div className='flex items-center gap-2'>
-              <button className='text-gray-400 hover:text-white transition'><Paperclip></Paperclip></button>
-              <button onClick={handlesend}  className='bg-gray-500 hover:bg-blue-900 p-2 rounded-full text-white transition'> <ArrowUp className='w-4 h-4'></ArrowUp></button>
-            </div>
+  {/* Input Box Section */}
+  <div className='w-full max-w-4xl px-2'>
+    <div className='relative flex flex-col bg-[#212121] border border-white/10 rounded-[1.5rem] shadow-2xl focus-within:border-blue-500/50 transition-all duration-300'>
+      <input 
+        type='text' 
+        value={inputValue}   
+        onChange={(e) => setInputvalue(e.target.value)} 
+        onKeyDown={handlekeydown}  
+        placeholder='Message Megatrone...' 
+        className='bg-transparent w-full text-white placeholder-gray-500 text-md md:text-lg outline-none px-6 py-4'
+      />
+      
+      <div className='flex items-center justify-between px-4 pb-3'>
+        <div className='flex gap-2'>
+           {/* Add optional action buttons here */}
+        </div>
+        
+        <div className='flex items-center gap-3'>
+          <button className='text-gray-500 hover:text-white transition-colors p-1'>
+            <Paperclip className="w-5 h-5" />
+          </button>
+          <button 
+            onClick={handlesend}  
+            disabled={!inputValue.trim()}
+            className={`${inputValue.trim() ? 'bg-white text-black' : 'bg-gray-700 text-gray-500'} p-2 rounded-full transition-all duration-200`}
+          > 
+            <ArrowUp className='w-5 h-5 font-bold' />
+          </button>
         </div>
       </div>
     </div>
-
-
-
-    </div>
+    <p className="text-[10px] text-gray-600 text-center mt-3 uppercase tracking-widest font-medium">
+      Megatrone can make mistakes. Check important info.
+    </p>
+  </div>
+</div>
   )
 }
 
