@@ -18,6 +18,7 @@ export default function Home() {
 };
  
   return (
+    
 
       <div className='flex h-screen bg-[#1e1e1e] text-white' >
 
@@ -43,9 +44,7 @@ export default function Home() {
       )}
       
      
-    {/* // <div className='flex h-screen bg-[#1e1e1e] text-white' >
-    //     {/* sidebar code */}
-    {/* //   <div className='w-64 bg-[#232327]'><Sidebar></Sidebar> </div> */} 
+    
 
        
 

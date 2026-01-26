@@ -29,7 +29,7 @@ useEffect(() => {
 }, [newchat]);
   
 
-// refresh ke baad user ka data htt na jaaye isliye hm localstorage me data store krre h or firr fetch krenge
+
   useEffect(() => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (prompt.length > 0) {
@@ -51,7 +51,7 @@ useEffect(() => {
      promptEndREf.current?.scrollIntoView({behavior:"smooth"})
   },[prompt,loading])
 
-  console.log(prompt)
+ 
 
  
 

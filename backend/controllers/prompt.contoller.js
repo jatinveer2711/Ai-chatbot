@@ -20,12 +20,12 @@ export const   sendPromt=async(req,res)=>{
              const userPrompt=await prompt.create({ 
                 userID,
                 role:"user",
-                content
+                content 
              })
             
             //send prompt to openai
-            const completion =await openai.chat.completions.create({ // user jo bhi content dala usko ai me send krne ke liye
-                messages:[{role:"user",content : content}], // role means jo user send krra h or content me hmne content pass kiya jisme user apna content dalega
+            const completion =await openai.chat.completions.create({ 
+                messages:[{role:"user",content : content}], 
                 model:"openai/gpt-4o",
                 max_tokens:1000
             });

@@ -19,4 +19,4 @@ const userSChema = new mongoose.Schema({
         required:true
     }
 })
-export const User=mongoose.model("user",userSChema)  //after compliting the userschema we convert the schema in the modle so we can use this schema in another file
+export const User=mongoose.model("user",userSChema)  

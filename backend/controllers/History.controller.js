@@ -30,7 +30,7 @@ export const getHistoryByUser = async (req, res) => {
     const userID= req.userID
        const history = await History.find({ userID}).sort({ createdAt: -1 });//sort({createdAt: -1}) means jiska last prompt h usko history me sbse pehke dikhayo
 
-    console.log(getHistoryByUser)
+    
 
     res.status(200).json(history);
   } catch (err) {

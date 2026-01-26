@@ -5,20 +5,20 @@ import jwt from "jsonwebtoken"
 
 
 //sign up function
-// we use awit ki jb tk respose nhi aa jata tb tk wait kro 
+
 
 export const signUp=async (req,res)=>{
-    const{firstName,lastName,email,password}=req.body; //  re.body se le rhe h means frotend se le rha h 
+    const{firstName,lastName,email,password}=req.body;  
     
     try{
         const user= await User.findOne({email:email})
         if(user){                                    
-            return res.status(400).json({error:"User already exists"})//
+            return res.status(400).json({error:"User already exists"})
         }
 
-        const hashPassword= await bcrypt.hash(password,10) // bcrypt is used to hide or hash the password in database
+        const hashPassword= await bcrypt.hash(password,10) 
 
-        const newuser=new User({                             // for fresh users and (this is part of else)
+        const newuser=new User({                             
             firstName,lastName,email,password:hashPassword, 
         })
          await newuser.save()
@@ -51,10 +51,10 @@ export const login= async(req,res)=>{
             expiresIn:"1d" 
 
         })
-        const cookieOptions={ // cookieoptions  token ke liye condtions de rha h 
-            expires:new Date(Date.now()+24*60*60*1000), // that date means one day 
-            httpOnly:true, // the cookie can not access directly
-            sercure:process.env.NODE_ENV==="production", // 
+        const cookieOptions={  
+            expires:new Date(Date.now()+24*60*60*1000), 
+            httpOnly:true, 
+            secure:process.env.NODE_ENV==="production", // 
             sameSite:"strict"
         }
 

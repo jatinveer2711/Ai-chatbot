@@ -7,7 +7,7 @@ import { useAuth } from './context/AuthoProvider'
 
 export default function App() {
   const [ authuser ]=useAuth() // useauth se le rha h auhtuser or authuser me token get krre h 
-  console.log(authuser)
+  
   return (
     <div >
     {/* authuser import krra h taaki ek authicated  user website ko accesss krr paaye  or ye  route ko protect krra h  */}

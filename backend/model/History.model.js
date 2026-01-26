@@ -1,11 +1,9 @@
 import mongoose from 'mongoose'
-// import { Content } from 'openai/resources/containers/files/content.mjs';
 
-// import { prompt } from 'openai/resources/containers/files/prompt.mjs';
 const historySchema = new mongoose.Schema({
   userID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user', // if you're using auth
+    ref: 'user', 
     required: true,
   },
 
@@ -13,6 +11,7 @@ const historySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  
   response: {
     type: String,
     required: true,

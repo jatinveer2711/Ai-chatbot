@@ -46,9 +46,9 @@ export default function login() {
       })
       console.log(data);
       alert(data.message || "login succeded")
-      localStorage.setItem("user",JSON.stringify(data.user)) //browser ke local storage prr data send krre h  user ka
-      localStorage.setItem("token",data.token)   //browser ke local storage prr token send krre h 
-      setAuthuser(data.token) // brwoser ke localsotage me save token ko le rha h 
+      localStorage.setItem("user",JSON.stringify(data.user)) 
+      localStorage.setItem("token",data.token)   
+      setAuthuser(data.token) 
       navigate("/login")
 
 

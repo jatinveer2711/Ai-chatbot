@@ -32,7 +32,7 @@ export default function Sidebar({onClose,onNewChat}) {
 
 
   const user = JSON.parse( localStorage.getItem("user"))
-console.log(user)
+
 
 const[,setAuthuser]=useAuth() //ye hmne isiye inport kraya h taaki hm setauthuser ki value null kr de 
 const navigate=useNavigate()//navigate ko isliye import krre h taaki hm user ko login page prr bejh de logout click krne ke baad
