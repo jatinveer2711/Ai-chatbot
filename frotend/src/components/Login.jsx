@@ -36,7 +36,7 @@ export default function login() {
     setError("")
     try{
 
-     const {data}= await axios.post("http://localhost:4002/api/v1/user/login",{
+     const {data}= await axios.post("https://ai-chatbot-wtf2.onrender.com/api/v1/user/login",{
         // firstName:formdata.firstName,
         // lastName:formdata.lastName,
         email:formdata.email,

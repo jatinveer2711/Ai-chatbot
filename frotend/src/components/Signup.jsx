@@ -36,7 +36,7 @@ export default function Signup() {
     setError("")
     try{
 
-     const {data}= await axios.post("http://localhost:4002/api/v1/user/signup",{ //axios is used for the call the backend ai means it connect the frotend and backend
+     const {data}= await axios.post("https://ai-chatbot-wtf2.onrender.com/api/v1/user/signup",{ //axios is used for the call the backend ai means it connect the frotend and backend
         firstName:formdata.firstName, 
         lastName:formdata.lastName,
         email:formdata.email,

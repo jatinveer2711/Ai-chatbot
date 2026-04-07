@@ -66,7 +66,7 @@ useEffect(() => {
     setLoading(true)
     try{
       const token=localStorage.getItem("token") 
-     const {data}= await axios.post("http://localhost:4002/api/v1/deepseekai/prompt",{ 
+     const {data}= await axios.post("https://ai-chatbot-wtf2.onrender.com/api/v1/deepseekai/prompt",{ 
         content:trimmed 
       },{
         headers:{Authorization:`Bearer ${token}` //is line me hm headers ke authorization me bearer type ka token  bejh rhe h 
@@ -80,7 +80,7 @@ useEffect(() => {
       {role:"assistant",content:data.reply} //agr role assitant h to answer ai bejh rha h  or data me axios backend h islye data use krre h
     ])
     // Ye AI ka response aane ke turant baad daalna
-await axios.post("http://localhost:4002/api/v1/history/save", {
+await axios.post("https://ai-chatbot-wtf2.onrender.com/api/v1/history/save", {
   content: trimmed,         // user's qution
   response: data.reply      // AI's response
 }, {

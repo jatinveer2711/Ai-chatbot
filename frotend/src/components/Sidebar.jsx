@@ -15,7 +15,7 @@ export default function Sidebar({onClose,onNewChat}) {
     const fetchHistory = async () => {
       try {
         const token = localStorage.getItem('token'); // login ke baad save kiya hoga
-        const res = await axios.get("http://localhost:4002/api/v1/history/history", { // ye backend me route ko call krri h jisme middleware h or gethistory function h 
+        const res = await axios.get("https://ai-chatbot-wtf2.onrender.com/api/v1/history/history", { // ye backend me route ko call krri h jisme middleware h or gethistory function h 
           headers: {
             Authorization: `Bearer ${token}`  //token bejh diya middleware ko ab vo verify krega 
           }
@@ -41,7 +41,7 @@ const navigate=useNavigate()//navigate ko isliye import krre h taaki hm user ko 
 const handlelogout=async()=>{
   
   try {
-    const {data}=await axios.get("http://localhost:4002/api/v1/user/logout",{ //ye url hmari backend ki funnction ko call krra h jisme clear cookie ka code h 
+    const {data}=await axios.get("https://ai-chatbot-wtf2.onrender.com/api/v1/user/logout",{ //ye url hmari backend ki funnction ko call krra h jisme clear cookie ka code h 
     withCredentials:true
   })
   localStorage.removeItem("user") //user ke data ko remove kr dega 
