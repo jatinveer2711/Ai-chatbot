@@ -43,7 +43,7 @@ useEffect(() => {
      if (storedPRompt){
       setPrompt(JSON.parse(storedPRompt))
      } 
-    }, [])
+    }, [])  
    
 
 

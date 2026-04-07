@@ -1,9 +1,12 @@
-import { Children, createContext, useContext, useState } from "react";
+import { Children, createContext, useContext, useState  } from "react";
 import Cookies from "js-cookie";
+
 
 export const AuthoContext=createContext()
 
+
 export  const Authprovider=({children})=>{ // is children me saare components aa rhe h "children=all components"
+ 
     const [authuser,setAuthuser]=useState(()=> {
       return localStorage.getItem("token") || Cookies.get("jwt") || null // is state me hm token or cookie get krre h localstorage se
     })
