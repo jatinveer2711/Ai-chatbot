@@ -21,10 +21,17 @@ apps.use(express.json())
 apps.use(cookieParser());
 apps.use(
   cors({
-    origin:process.env.FROTEND_URL,
-    credentials:true,
-    methods:["GET","POST","PUT","DELETE"],
-    allowedHeaders:["content-Type","Authorization"]
+    // origin:process.env.FROTEND_URL,
+    // credentials:true,
+    // methods:["GET","POST","PUT","DELETE"],
+    // allowedHeaders:["content-Type","Authorization"]
+    
+
+    origin: "https://ai-chatbot-blue-theta-96.vercel.app", // hardcode kar abhi
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  
   })
 )
 
