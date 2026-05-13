@@ -119,7 +119,7 @@ await axios.post("https://ai-chatbot-wtf2.onrender.com/api/v1/history/save", {
       <div className='text-center'>
         <div className="w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl mb-6 mx-auto shadow-lg shadow-blue-500/20" />
         <h1 className='text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight'>
-          Hi, I'm <span className="text-blue-500">Megatrone</span>
+          Hi, I'm <span className="text-blue-500">NeroMax</span>
         </h1>
         <p className='text-gray-400 text-lg'>How can I help you today?</p>
       </div>
