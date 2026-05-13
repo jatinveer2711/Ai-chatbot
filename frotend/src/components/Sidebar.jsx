@@ -67,7 +67,7 @@ return (
   <div className='p-5 flex items-center justify-between'>
     <div className='flex items-center gap-2'>
       <div className='w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white'>M</div>
-      <span className='text-lg font-semibold text-white tracking-tight'>Megatrone</span>
+      <span className='text-lg font-semibold text-white tracking-tight'>NeroMax</span>
     </div>
     <button 
       onClick={onClose} 
